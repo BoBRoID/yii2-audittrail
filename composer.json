@@ -1,5 +1,5 @@
 {
-    "name": "sammaye/yii2-audittrail",
+    "name": "bobroid/yii2-audittrail",
     "description": "A port of audit trail",
     "keywords": ["yii2", "extension", "audit", "trail", "audit trail", "audittrail"],
     "type": "yii2-extension",
@@ -8,6 +8,10 @@
         {
             "name": "Sammaye",
             "homepage": "http://sammaye.wordpress.com/"
+        },
+        {
+	    "name": "Nikolai Gilko",
+	    "email": "n.gilko@gmail.com"
         }
     ],
     "require": {

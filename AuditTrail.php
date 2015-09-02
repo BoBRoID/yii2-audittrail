@@ -19,8 +19,10 @@ use yii\db\ActiveRecord;
  */
 class AuditTrail extends ActiveRecord
 {
-    private $_message_category = 'audittrail';
-    
+	private $_message_category = 'audittrail';
+
+	public $options = [];
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -33,28 +35,28 @@ class AuditTrail extends ActiveRecord
 		}
 	}
 
-    /**
-     * @return \yii\db\Connection the database connection used by this AR class.
-     */
-    public static function getDb() 
-    {
-        if (isset(Yii::$app->params['audittrail.db'])) {
-            return Yii::$app->get(Yii::$app->params['audittrail.db']);
-        } else  {
-            return parent::getDb();
-        }
-        // return Yii::$app->get('dbUser');
-    }
-        
-    public function init()
-    {
-        parent::init();
-        
-        \Yii::$app->i18n->translations[$this->_message_category] = [
-            'class' => 'yii\i18n\PhpMessageSource',
-        ];
-    }
-	
+	/**
+	 * @return \yii\db\Connection the database connection used by this AR class.
+	 */
+	public static function getDb()
+	{
+		if (isset(Yii::$app->params['audittrail.db'])) {
+			return Yii::$app->get(Yii::$app->params['audittrail.db']);
+		} else  {
+			return parent::getDb();
+		}
+		// return Yii::$app->get('dbUser');
+	}
+
+	public function init()
+	{
+		parent::init();
+
+		\Yii::$app->i18n->translations[$this->_message_category] = [
+			'class' => 'yii\i18n\PhpMessageSource',
+		];
+	}
+
 	/**
 	 * @return array customized attribute labels (name=>label)
 	 */
@@ -71,7 +73,7 @@ class AuditTrail extends ActiveRecord
 			'user_id' => Yii::t('audittrail','User'),
 			'model_id' => Yii::t('audittrail','ID'),
 		];
-	}	
+	}
 
 	/**
 	 * @return array validation rules for model attributes.
@@ -88,12 +90,12 @@ class AuditTrail extends ActiveRecord
 			[['old_value', 'new_value'], 'safe']
 		];
 	}
-	
+
 	public static function recently($query)
 	{
 		$query->orderBy(['[[stamp]]' => SORT_DESC]);
 	}
-	
+
 	public function getUser()
 	{
 		if(isset(Yii::$app->params['audittrail.model']) && isset(Yii::$app->params['audittrail.model'])){
