@@ -21,8 +21,6 @@ class AuditTrail extends ActiveRecord
 {
 	private $_message_category = 'audittrail';
 
-	public $options = [];
-
 	/**
 	 * @return string the associated database table name
 	 */
